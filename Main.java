@@ -10,14 +10,9 @@ import java.util.Properties;
 public class Main {
  
     public static void main(String[] args) {
- 
-        Connection conn1 = null;
         Connection conn = null;
-        Connection conn3 = null;
- 
+
         try {
-            // registers Oracle JDBC driver - though this is no longer required
-            // since JDBC 4.0, but added here for backward compatibility
             Class.forName("oracle.jdbc.OracleDriver");
 
             String dbURL2 = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST="+System.getenv("DB_HOST")+")(PORT=1522))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ECST2)))";
