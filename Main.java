@@ -32,20 +32,20 @@ public class Main {
 
             Statement stmt = conn.createStatement();
             for(int i= 0 ; i< NUM_EXECUTIONS; i++) {
-                startTime = System.currentTimeMillis();
+                startTime = System.nanoTime();
                 ResultSet rs = stmt.executeQuery(SQL);
 
                 while (rs.next()) {
                     String instr_id = rs.getString("instrument_id");
                 }
-                durations.add(System.currentTimeMillis() - startTime);
+                durations.add(System.nanoTime() - startTime);
             }
 
             long sum =  durations.stream().mapToLong(a -> a).sum();
             long max = Collections.max(durations);
             long min = Collections.min(durations);
 
-            System.out.println("Min :" + min +  ", Max :" + max + ", Avg :" + sum/NUM_EXECUTIONS +" milliseconds");
+            System.out.println("Min :" + min +  ", Max :" + max + ", Avg :" + sum/NUM_EXECUTIONS +" (nanoseconds)");
 
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
