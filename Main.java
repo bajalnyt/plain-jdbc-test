@@ -14,10 +14,8 @@ public class Main {
  
     public static void main(String[] args) {
         Connection conn = null;
-        final String SQL = "SELECT ID, instrument_id,start_date FROM subscription " +
-                           "WHERE id In (1029779155,1029779163,1029779164,1029779151," +
-                           "1029779157,1029779159,1029779160,1029779169,1029779170)";
-        final int NUM_EXECUTIONS = 1000;
+        final String SQL = "INSERT INTO core_owner.google_real_time_developer_subscription_notifications (id, parent_notification_version, package_name,event_time_millis, subscription_notification_version,                                                                              notification_type, purchase_token,                                                                              subscription_id, order_id,                                                                              notification_json, created_by)VALUES (1,        'parentNotificationVersion',        'packageName',        12345667788,        'subscriptionNotificationVersion',        'notificationType',        'purchaseToken',        'subscriptionId',        'orderId',        'notificationJson',        'rf')";
+        final int NUM_EXECUTIONS = 1;
 
         try {
             Class.forName("oracle.jdbc.OracleDriver");
@@ -31,21 +29,22 @@ public class Main {
             List<Long> durations = new ArrayList<>();
 
             Statement stmt = conn.createStatement();
-            for(int i= 0 ; i< NUM_EXECUTIONS; i++) {
-                startTime = System.nanoTime();
-                ResultSet rs = stmt.executeQuery(SQL);
+            ResultSet rs = stmt.executeQuery(SQL);
+            // for(int i= 0 ; i< NUM_EXECUTIONS; i++) {
+            //     startTime = System.nanoTime();
+            //     ResultSet rs = stmt.executeQuery(SQL);
 
-                while (rs.next()) {
-                    String instr_id = rs.getString("instrument_id");
-                }
-                durations.add(System.nanoTime() - startTime);
-            }
+            //     while (rs.next()) {
+            //         String instr_id = rs.getString("instrument_id");
+            //     }
+            //     durations.add(System.nanoTime() - startTime);
+            // }
 
-            long sum =  durations.stream().mapToLong(a -> a).sum();
-            long max = Collections.max(durations);
-            long min = Collections.min(durations);
+            // long sum =  durations.stream().mapToLong(a -> a).sum();
+            // long max = Collections.max(durations);
+            // long min = Collections.min(durations);
 
-            System.out.println("Min :" + min +  ", Max :" + max + ", Avg :" + sum/NUM_EXECUTIONS +" (nanoseconds)");
+            // System.out.println("Min :" + min +  ", Max :" + max + ", Avg :" + sum/NUM_EXECUTIONS +" (nanoseconds)");
 
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
